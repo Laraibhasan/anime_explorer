@@ -23,6 +23,7 @@ header h1{
   color: #ff0000;
 }
 
+
 form input {
   padding: 0.5rem;
   border: none;
@@ -39,12 +40,78 @@ form button {
   cursor: pointer;
 }
 
-#sortSelect {
-  padding: 0.5rem;
+form button:hover,
+form button:focus {
+  background-color: #FF0000; /* bright red from palette */
+}
+
+
+#genreSelect {
+  padding: 0.4rem 1rem;
   border-radius: 5px;
-  background-color: #950101;
+  background-color: #950101; /* dark red from palette */
   color: white;
   border: none;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Optional: change hover/focus color */
+#genreSelect:hover,
+#genreSelect:focus {
+  background-color: #FF0000; /* bright red from palette */
+}
+
+/* Optional: make the dropdown list match the theme */
+#genreSelect option {
+  background-color: #3D0000; /* darker background for options */
+  color: white;
+}
+
+.menu-container {
+  position: absolute;
+  right: 50px;
+}
+
+.hamburger {
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  background-color: #950101;
+  padding: 0.4rem 0.7rem;
+  border-radius: 50px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  background-color: #950101;
+  border-radius: 5px;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  /* Animation setup */
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+.menu.show {
+  max-height: 200px; /* Adjust if more items are added */
+  transition: max-height 0.3s ease-in;
+}
+
+.menu a {
+  padding: 0.6rem 1rem;
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.menu a:hover {
+  background-color: #FF0000;
 }
 
 main {
