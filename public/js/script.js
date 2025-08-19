@@ -153,22 +153,14 @@ function bindFavoriteEvents() {
 
     e.stopPropagation();
 
-    if (!window.isLoggedIn || window.isLoggedIn === 'false') {
-      // If user not logged in, set localStorage flag and reload page on 'pageshow' event
-      window.addEventListener('pageshow', (event) => {
-        if (localStorage.getItem('favoritesChanged') === 'true' || event.persisted) {
-          localStorage.removeItem('favoritesChanged');
-          window.location.href = "/login";
-        }
-      });
-      localStorage.setItem('favoritesChanged', 'true');
-      window.location.href = "/login";
-      return;
-    }
-
     // User is logged in, proceed with toggle
     const animeId = btn.dataset.id;
     const isCurrentlyFavorited = btn.classList.contains("favorited");
+    // If user is not logged in and tries to add favorite, show alert
+    if ((!window.isLoggedIn || window.isLoggedIn === 'false') && !isCurrentlyFavorited) {
+      alert("Please log in to add favorites.");
+      return;
+    }
     const url = isCurrentlyFavorited ? "/favorites/remove" : "/favorites/add";
 
     btn.disabled = true;
