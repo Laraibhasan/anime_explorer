@@ -20,6 +20,8 @@ const saltRounds = 10;
 
 env.config();
 
+mongoose.set('strictQuery', false);
+
 // ---------- MongoDB connection ----------
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
