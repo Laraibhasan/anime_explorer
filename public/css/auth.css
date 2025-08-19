@@ -241,9 +241,13 @@ button[type="submit"]:hover {
   /* Inputs */
   .login-form input,
   .signup-form input {
-    font-size: 1rem;
-    padding: 14px;
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    width: 100%;            /* Full width but constrained within container */
+    max-width: 100%;        /* Prevent overflow */
+    margin: 10px 0;
+    padding: 14px;          /* Adjust as needed */
   }
+
 
   /* Buttons */
   .login-form button,
@@ -258,18 +262,4 @@ button[type="submit"]:hover {
   .signup-container {
     margin: 0 auto; /* Center horizontally */
   }
-}
-
-.spinner {
-  border: 8px solid rgba(255, 255, 255, 0.2);
-  border-top: 8px solid #ff0000;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  margin: 0 auto 1rem auto;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
 }
