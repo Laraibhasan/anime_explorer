@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Sign Up - Anime Explorer</title>
+  <link rel="stylesheet" href="/css/auth.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="signup-container">
+    <h1>Sign Up</h1>
+
+    <form action="/signup" method="POST" class="signup-form">
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <div class="divider">OR</div>
+
+    <a class="google-btn" href="/auth/google" role="button">
+      <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" />
+      Sign up with Google
+    </a>
+
+    <p class="login-text">Already have an account? <a href="/login">Login</a></p>
+  </div>
+</body>
+</html>

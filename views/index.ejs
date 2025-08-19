@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anime Explorer</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+  <script>
+    window.isLoggedIn = "<%= user ? 'true' : 'false' %>";
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Anime Explorer</h1>
+    <form id="searchForm" action="/search" method="get">
+      <input type="text" name="q" placeholder="Search anime..." />
+      <button type="submit">Search</button>
+    </form>
+    <select id="genreSelect">
+      <option value="">Filter by Genre</option>
+      <option value="1">Action</option>
+      <option value="2">Adventure</option>
+      <option value="4">Comedy</option>
+      <option value="8">Drama</option>
+      <option value="10">Fantasy</option>
+      <option value="14">Horror</option>
+      <option value="22">Romance</option>
+      <option value="24">Sci-Fi</option>
+      <option value="30">Sports</option>
+    </select>
+    <div class="menu-container">
+      <div class="hamburger" id="hamburger">&#9776;</div>
+      <div class="menu" id="menu">
+        <ul>
+          <li><a href="/favorites">Favorites</a></li>
+          <% if (user) { %>
+            <li class="user-info">
+              <span><%= user.email %></span>
+              <a href="/logout">Logout</a>
+            </li>
+          <% } else { %>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+<main id="animeList">
+  <% animeList.forEach(anime => { %>
+    <div class="anime-card"
+         data-title="<%= anime.title %>"
+         data-episodes="<%= anime.episodes || 'N/A' %>"
+         data-score="<%= anime.score || 'N/A' %>"
+         data-synopsis="<%= anime.synopsis ? anime.synopsis.replace(/"/g, '&quot;') : 'No synopsis available.' %>">
+      
+      <div class="anime-card-content">
+        <img src="<%= anime.images.jpg.image_url %>" alt="<%= anime.title %>" />
+        <div class="anime-info">
+          <h3><%= anime.title %></h3>
+          <p>Score: <%= anime.score || 'N/A' %></p>
+          <p>Episodes: <%= anime.episodes || 'N/A' %></p>
+        </div>
+      </div>
+
+      <div class="anime-card-footer">
+        <button
+          class="favorite-btn <%= anime.isFavorited ? 'favorited' : '' %>"
+          data-id="<%= anime.mal_id %>">
+          <%= anime.isFavorited ? 'Added to Favorites' : 'Add to Favorites' %>
+        </button>
+      </div>
+
+    </div>
+  <% }) %>
+</main>
+  
+  <div class="load-more-container">
+    <button id="loadMoreBtn">Load More</button>
+  </div>  
+
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+  
+  <script src="/js/script.js"></script>
+</body>
+</html>

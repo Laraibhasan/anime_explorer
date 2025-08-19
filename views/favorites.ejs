@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Favorites - Anime Explorer</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>FAVORITES</h1>
+      <ul class="menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/favorites" class="active">Favorites</a></li>
+        <% if (user) { %>
+          <li class="user-info">Logged in as <%= user.email %></li>
+          <li><a href="/logout">Logout</a></li>
+        <% } else { %>
+          <li><a href="/login">Login</a></li>
+        <% } %>
+      </ul>
+  </header>
+
+  <main id="animeList">
+    <% if (animeList.length > 0) { %>
+      <% animeList.forEach(anime => { %>
+        <div class="anime-card"
+             data-title="<%= anime.title %>"
+             data-episodes="<%= anime.episodes || 'N/A' %>"
+             data-score="<%= anime.score || 'N/A' %>"
+             data-synopsis="<%= anime.synopsis ? anime.synopsis.replace(/\"/g, '&quot;') : 'No synopsis available.' %>">
+
+          <div class="anime-card-content">
+            <img src="<%= anime.images.jpg.image_url %>" alt="<%= anime.title %>"/>
+            <div class="anime-info">
+              <h3><%= anime.title %></h3>
+              <p>Score: <%= anime.score || 'N/A' %></p>
+              <p>Episodes: <%= anime.episodes || 'N/A' %></p>
+            </div>
+          </div>
+
+          <div class="anime-card-footer">
+            <button class="favorite-btn favorited" data-id="<%= anime.mal_id %>">
+              Added to Favorites
+            </button>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p class="empty-message">You don’t have any favorites yet. Go add some!</p>
+    <% } %>
+  </main>
+    
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <div id="loader" style="display:none; text-align:center; padding: 2rem;">
+  <div class="spinner"></div>
+    <p>Loading favorites...</p>
+  </div>
+
+
+  <script src="/js/script.js"></script>
+</body>
+</html>
