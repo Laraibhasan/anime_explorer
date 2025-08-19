@@ -106,9 +106,6 @@ form button:focus {
   transition: max-height 0.3s ease-out;
 }
 
-.menu {
-  display: none;
-}
 .menu.active {
   display: block;
 }
