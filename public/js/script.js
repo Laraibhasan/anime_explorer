@@ -94,6 +94,13 @@ function createCard(anime) {
   return card;
 }
 
+window.addEventListener('pageshow', (event) => {
+  if (localStorage.getItem('favoritesChanged') === 'true' || event.persisted) {
+    localStorage.removeItem('favoritesChanged');
+    window.location.reload();
+  }
+});
+
 function loadMoreAnime() {
   if (loading) return;
   loading = true;
